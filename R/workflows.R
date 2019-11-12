@@ -70,7 +70,7 @@ add_workflow <- function(name, description, organisation, groups, graph) {
     response <- request(POST, path = 'workflows',
                         body = jsonlite::toJSON(body, auto_unbox = TRUE,
                                                 null = 'null'),
-                        config = content_type('application/json'))
+                        config = httr::content_type('application/json'))
     status <- httr::status_code(response)
 
     if (!(status %in% c(200, 201))) {
