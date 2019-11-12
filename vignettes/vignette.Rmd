@@ -14,6 +14,7 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
 )
+library(RSenaps)
 ```
 
 # Introduction
@@ -21,6 +22,11 @@ knitr::opts_chunk$set(
 `RSenaps` is a R package to communicate with [Senaps platform](http://sensor-cloud.io). 
 
 # Before start
-A user account needs to be created in [Senaps](http://sensor-cloud.io). It it much securer to use `api key` to make requests to Senaps, not the username and pasword.
+A user account needs to be created in [Senaps](http://sensor-cloud.io). It it much securer to use `api key` to make requests to Senaps, NOT the username and pasword. The `api key` can be stored in the environmental variable and read in your Rscript (e.g. `SENAPS_API_KEY`).
 
+The `apikey` can be set using `senaps_option`.
+
+```{r}
+senaps_options(apikey = Sys.getenv('SENAPS_API_KEY'))
+```
 
