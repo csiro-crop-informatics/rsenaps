@@ -130,7 +130,8 @@ put_stream <- function(id, organisation,
     status <- status_code(response)
 
     if (!(status %in% c(200, 201))) {
-        stop(http_status(response)$message)
+        stop("Error to create stream. The HTTP status error is \"",  http_status(response)$message,
+             "\". The response error is \"", content(response)$message, "\"")
     }
     return (TRUE)
 }
