@@ -4,11 +4,21 @@ Title: R Package for Senaps
 Version: 0.1.0.116
 Author: Bangyou Zheng
 Maintainer: Bangyou Zheng <Bangyou.Zheng@csiro.au>
-Description: R package to access Senaps platform
+Description: R package to access Senaps platform.
 License: As IS
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 6.1.1
-Suggests: knitr,
+Depends:
+    R (>= 3.0.0)
+Suggests:
+    knitr,
     rmarkdown
+Imports: 
+    httr,
+    dplyr,
+    purrr,
+    jsonlite,
+    settings,
+    magrittr
 VignetteBuilder: knitr
