@@ -3,21 +3,36 @@
 # * Copyright: AS IS
 
 
+#' Count streams in the Senaps
+#'
+#' @return Number of streams
+#' @export
+count_streams <- function(groups = NULL) {
+    query <- list()
+    if (!is.null(groups)) {
+        query <- list(groupids = groups)
+    }
+    response <- request(GET, 'streams/count', query = query)
+    httr::stop_for_status(response)
+    contents <- httr::content(response)
+    contents$count
+}
+
 
 #' The all streams in the Senaps
 #'
 #' @param groups A group id (optional)
 #' @param observed_property An observed property uri
-#' @param near
-#' @param radius
+#' @param limit Maximum records to retrieve
 #'
 #' @return A data frame with all streamids
 #' @export
+
 get_streams <- function(groups = NULL,
                         observed_property = NULL,
-                        near = NULL,
-                        radius = NULL) {
-    query <- list()
+                        limit = 1000) {
+    query <- list(limit = limit)
+
     if (!is.null(groups)) {
         query$groupids <- groups
     }
