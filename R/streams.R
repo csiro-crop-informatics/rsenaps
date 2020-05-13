@@ -6,13 +6,26 @@
 
 #' The all streams in the Senaps
 #'
+#' @param groups A group id (optional)
+#' @param observed_property An observed property uri
+#' @param near
+#' @param radius
+#'
 #' @return A data frame with all streamids
 #' @export
-get_streams <- function(groups = NULL) {
+get_streams <- function(groups = NULL,
+                        observed_property = NULL,
+                        near = NULL,
+                        radius = NULL) {
     query <- list()
     if (!is.null(groups)) {
-        query <- list(groupids = groups)
+        query$groupids <- groups
     }
+
+    if (!is.null(observed_property)) {
+        query$streamMetadata.observedProperty = observed_property
+    }
+
     response <- request(GET, 'streams', query = query)
     httr::stop_for_status(response)
     contents <- httr::content(response)
@@ -130,8 +143,7 @@ put_stream <- function(id, organisation,
     status <- status_code(response)
 
     if (!(status %in% c(200, 201))) {
-        stop("Error to create stream. The HTTP status error is \"",  http_status(response)$message,
-             "\". The response error is \"", content(response)$message, "\"")
+        stop(http_status(response)$message)
     }
     return (TRUE)
 }
