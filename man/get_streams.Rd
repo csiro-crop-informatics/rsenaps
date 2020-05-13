@@ -4,7 +4,15 @@
 \alias{get_streams}
 \title{The all streams in the Senaps}
 \usage{
-get_streams(groups = NULL)
+get_streams(groups = NULL, observed_property = NULL, near = NULL,
+  radius = NULL)
+}
+\arguments{
+\item{groups}{A group id (optional)}
+
+\item{observed_property}{An observed property uri}
+
+\item{radius}{}
 }
 \value{
 A data frame with all streamids
