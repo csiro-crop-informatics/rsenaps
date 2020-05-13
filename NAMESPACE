@@ -2,6 +2,7 @@
 
 export(add_workflow)
 export(clean_group)
+export(count_streams)
 export(delete_group)
 export(delete_location)
 export(delete_observations)
