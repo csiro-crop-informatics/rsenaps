@@ -153,3 +153,42 @@ delete_platform <- function(id, cascade = FALSE) {
     status <- status_code(response)
     status
 }
+
+#' Get the current deployment for a platform
+#'
+#' @param platform_detail A list of platform details. Output from `get_platform`
+#'
+#' @return A list with deployment details
+#' @export
+#'
+#' @examples
+#' \dontrun{
+#'   current_deployment('rsenaps.platform.test1')
+#' }
+#'
+
+current_deployment <- function(platform_detail) {
+    #  browser()
+    d <- platform_detail$deployments
+
+    if(length(d) == 0) return(NULL)
+
+    finish <- lapply(d, function(d) {
+        return(d$validTime$finish)
+    })
+
+    lfinish <- as.logical(lapply(finish, is.null))
+
+    if(any(lfinish[length(lfinish) - 1])) stop("More than the last deployment has a NULL finish time")
+
+    start <- lapply(d, function(d) {
+        return(d$validTime$start)
+    })
+
+    lstart <- as.logical(lapply(start, is.null))
+
+    if(length(lfinish) != length(start)) stop("check deployments, there's something wrong")
+
+    if(as.POSIXct(start[[1]]) < Sys.time()) return(d[[length(d)]])
+
+}
