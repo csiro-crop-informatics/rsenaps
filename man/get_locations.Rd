@@ -2,7 +2,7 @@
 % Please edit documentation in R/locations.R
 \name{get_locations}
 \alias{get_locations}
-\title{The all locations in the Senaps}
+\title{Get location ids from Senaps}
 \usage{
 get_locations(groups = NULL, near = NULL, radius = NULL)
 }
@@ -14,8 +14,8 @@ get_locations(groups = NULL, near = NULL, radius = NULL)
 \item{radius}{The distance (in m) around the near point to search}
 }
 \value{
-A data.frame of locations
+A vector of location ids
 }
 \description{
-The all locations in the Senaps
+Get location ids from Senaps
 }
