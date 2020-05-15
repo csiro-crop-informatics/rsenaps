@@ -74,7 +74,7 @@ get_stream <- function(id) {
     res$organisationid <- map_chr(contents$`_embedded`$organisation, 'id')
     res$groupids <- map_chr(contents$`_embedded`$groups, 'id')
     if (!is.null(contents$`_embedded`$location)) {
-        res$localtionid <- map_chr(contents$`_embedded`$location, 'id')
+        res$locationid <- map_chr(contents$`_embedded`$location, 'id')
     }
     res$reportingPeriod <- contents$reportingPeriod
     res$samplePeriod <- contents$samplePeriod
