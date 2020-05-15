@@ -4,7 +4,7 @@
 \alias{get_streams}
 \title{The all streams in the Senaps}
 \usage{
-get_streams(groups = NULL)
+get_streams(groups = NULL, limit = 1000)
 }
 \value{
 A data frame with all streamids
