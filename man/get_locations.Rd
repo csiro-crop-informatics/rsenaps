@@ -4,7 +4,14 @@
 \alias{get_locations}
 \title{The all locations in the Senaps}
 \usage{
-get_locations(groups = NULL)
+get_locations(groups = NULL, near = NULL, radius = NULL)
+}
+\arguments{
+\item{groups}{group ids}
+
+\item{near}{A WKT string eg "POINT (lat lon)"}
+
+\item{radius}{The distance (in m) around the near point to search}
 }
 \value{
 A data.frame of locations
