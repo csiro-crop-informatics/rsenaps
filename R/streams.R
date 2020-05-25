@@ -3,13 +3,28 @@
 # * Copyright: AS IS
 
 
+#' Count streams in the Senaps
+#'
+#' @return Number of streams
+#' @export
+count_streams <- function(groups = NULL) {
+    query <- list()
+    if (!is.null(groups)) {
+        query <- list(groupids = groups)
+    }
+    response <- request(GET, 'streams/count', query = query)
+    httr::stop_for_status(response)
+    contents <- httr::content(response)
+    contents$count
+}
+
 
 #' The all streams in the Senaps
 #'
 #' @return A data frame with all streamids
 #' @export
-get_streams <- function(groups = NULL) {
-    query <- list()
+get_streams <- function(groups = NULL, limit = 1000) {
+    query <- list(limit = limit)
     if (!is.null(groups)) {
         query <- list(groupids = groups)
     }
@@ -130,7 +145,8 @@ put_stream <- function(id, organisation,
     status <- status_code(response)
 
     if (!(status %in% c(200, 201))) {
-        stop(http_status(response)$message)
+        stop("Error to create stream. The HTTP status error is \"",  http_status(response)$message,
+             "\". The response error is \"", content(response)$message, "\"")
     }
     return (TRUE)
 }

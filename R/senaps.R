@@ -56,9 +56,9 @@ request <- function(method,
         host <- SENAPS_OPTIONS("sensor_url")
     } else if (commands %in% c("base-images", "models", "workflows", 'schedules')) {
         host <- SENAPS_OPTIONS("analysis_url")
-    } else if (commands %in% c('data', "drill")) {
+    } else if (commands %in% c('data')) {
         host <- SENAPS_OPTIONS("tmd_url")
-        path <- gsub('^(data|drill)(/)(.*)', '\\3', path)
+        path <- gsub('^(data/)(.*)', '\\2', path)
     } else {
         stop(paste0("Not implemented api for \"", commands, "\""))
     }
