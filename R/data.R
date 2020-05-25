@@ -43,7 +43,7 @@ get_data <- function(path, var,
     if (grepl('^https?://', path)) {
         response <- GET(path, query = query)
     } else {
-        response <- request(GET, paste0('data/', path), query = query)
+        response <- request(GET, paste0('drill/', path), query = query)
     }
     httr::stop_for_status(response)
 
