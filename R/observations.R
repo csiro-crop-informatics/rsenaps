@@ -163,4 +163,3 @@ delete_observations <- function(id) {
     status <- status_code(response)
     status
 }
-
