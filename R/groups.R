@@ -154,19 +154,24 @@ clean_group <- function(id, ask = TRUE) {
     }
 
     recursive_clean_group <- function(id) {
+        # Delete platforms
+        platforms <- get_platforms(groups = id)
+        for (i in seq(along = platforms)) {
+            p <- get_platform(platforms[i])
+            put_platform(platforms[i], organisation = p$organisation,
+                         groups = p$groups)
+            delete_platform(platforms[i])
+        }
+
         # Delete streams
-        streams <- get_streams(groups = id)
+        stream_count <- count_streams(groups = id)
+        streams <- get_streams(groups = id, limit = stream_count)
         for (i in seq(along = streams)) {
             delete_observations(streams[i])
             delete_stream(streams[i])
         }
 
 
-        # Delete platforms
-        platforms <- get_platforms(groups = id)
-        for (i in seq(along = platforms)) {
-            delete_platform(platforms[i])
-        }
 
         # Delete locations
         locations <- get_locations(groups = id)
@@ -175,7 +180,7 @@ clean_group <- function(id, ask = TRUE) {
         }
 
         # Delete child groups
-        child_groups <- get_groups(groups = id)
+        child_groups <- rev(get_groups(groups = id))
         for (i in seq(along = child_groups)) {
             recursive_clean_group(child_groups[i])
         }
