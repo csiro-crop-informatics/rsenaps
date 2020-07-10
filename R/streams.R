@@ -21,13 +21,26 @@ count_streams <- function(groups = NULL) {
 
 #' The all streams in the Senaps
 #'
+#' @param groups A group id (optional)
+#' @param observed_property An observed property uri
+#' @param limit Maximum records to retrieve
+#'
 #' @return A data frame with all streamids
 #' @export
-get_streams <- function(groups = NULL, limit = 1000) {
+
+get_streams <- function(groups = NULL,
+                        observed_property = NULL,
+                        limit = 1000) {
     query <- list(limit = limit)
+
     if (!is.null(groups)) {
-        query <- list(groupids = groups)
+        query$groupids <- groups
     }
+
+    if (!is.null(observed_property)) {
+        query$streamMetadata.observedProperty = observed_property
+    }
+
     response <- request(GET, 'streams', query = query)
     httr::stop_for_status(response)
     contents <- httr::content(response)
@@ -61,7 +74,7 @@ get_stream <- function(id) {
     res$organisationid <- map_chr(contents$`_embedded`$organisation, 'id')
     res$groupids <- map_chr(contents$`_embedded`$groups, 'id')
     if (!is.null(contents$`_embedded`$location)) {
-        res$localtionid <- map_chr(contents$`_embedded`$location, 'id')
+        res$locationid <- map_chr(contents$`_embedded`$location, 'id')
     }
     res$reportingPeriod <- contents$reportingPeriod
     res$samplePeriod <- contents$samplePeriod
@@ -145,8 +158,7 @@ put_stream <- function(id, organisation,
     status <- status_code(response)
 
     if (!(status %in% c(200, 201))) {
-        stop("Error to create stream. The HTTP status error is \"",  http_status(response)$message,
-             "\". The response error is \"", content(response)$message, "\"")
+        stop(http_status(response)$message)
     }
     return (TRUE)
 }

@@ -4,7 +4,14 @@
 \alias{get_streams}
 \title{The all streams in the Senaps}
 \usage{
-get_streams(groups = NULL)
+get_streams(groups = NULL, observed_property = NULL, limit = 1000)
+}
+\arguments{
+\item{groups}{A group id (optional)}
+
+\item{observed_property}{An observed property uri}
+
+\item{limit}{Maximum records to retrieve}
 }
 \value{
 A data frame with all streamids

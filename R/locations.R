@@ -4,14 +4,28 @@
 
 
 
-#' The all locations in the Senaps
+#' Get location ids from Senaps
 #'
-#' @return A data.frame of locations
+#' @param groups group ids
+#' @param near A WKT string eg "POINT (lat lon)"
+#' @param radius The distance (in m) around the near point to search
+#'
+#' @return A vector of location ids
 #' @export
-get_locations <- function(groups = NULL) {
+get_locations <- function(groups = NULL,
+                          near = NULL,
+                          radius = NULL) {
     query <- list()
     if (!is.null(groups)) {
         query$groupids <- groups
+    }
+
+    if (!is.null(near)) {
+        query$near <- near
+    }
+
+    if (!is.null(radius)) {
+        query$radius <- radius
     }
     response <- request(GET, 'locations', query = query)
     httr::stop_for_status(response)

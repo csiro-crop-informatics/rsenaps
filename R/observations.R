@@ -87,7 +87,7 @@ get_observations <- function(streamid,
                 tz = tz)
             k <- k + 1
             result[[k]] <- res
-            if (nrow(res) < query$limit) {
+            if (nrow(res) <= query$limit) {
                 break
             } else {
                 query$start <- format_datetime(res$timestamp[nrow(res)], tz = tz)
@@ -163,4 +163,3 @@ delete_observations <- function(id) {
     status <- status_code(response)
     status
 }
-
