@@ -14,7 +14,7 @@ Depends:
 Suggests:
     knitr,
     rmarkdown,
-    testthat
+    testthat (>= 2.1.0)
 Imports: 
     httr,
     dplyr,
