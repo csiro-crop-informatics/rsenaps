@@ -1,6 +1,3 @@
-# * Author:    Bangyou Zheng (Bangyou.Zheng@csiro.au)
-# * Created:   09:29 PM Wednesday, 08 August 2018
-# * Copyright: AS IS
 
 # functions related with schedule
 

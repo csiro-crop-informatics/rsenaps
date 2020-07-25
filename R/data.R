@@ -1,6 +1,3 @@
-# * Author:    Bangyou Zheng (Bangyou.Zheng@csiro.au)
-# * Created:   02:49 PM Monday, 17 September 2018
-# * Copyright: AS IS
 
 # Function related with tmd data
 #' Retrieving data from the NetCDF Subset Service (NCSS) in Senaps

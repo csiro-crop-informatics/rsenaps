@@ -1,6 +1,3 @@
-# * Author:    Bangyou Zheng (Bangyou.Zheng@csiro.au)
-# * Created:   08:46 PM Thursday, 14 June 2018
-# * Copyright: AS IS
 
 #' Create a new platform or update an existing platform
 #'
