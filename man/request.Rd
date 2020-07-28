@@ -14,9 +14,6 @@ request(method, path = "/", query = list(), ...)
 \item{query}{The query of request}
 
 \item{...}{Other arguments of request}
-
-\item{config}{The config of connection. Suggest to use default method and add credential
-in the system environmental variables}
 }
 \value{
 The contents of response

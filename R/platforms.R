@@ -1,6 +1,3 @@
-# * Author:    Bangyou Zheng (Bangyou.Zheng@csiro.au)
-# * Created:   08:46 PM Thursday, 14 June 2018
-# * Copyright: AS IS
 
 #' Create a new platform or update an existing platform
 #'
@@ -109,6 +106,8 @@ get_platform <- function(id) {
 
 #' The all platforms in the Senaps
 #'
+#' @param groups A list of group ids
+#'
 #' @return A data frame with all streamids
 #' @export
 #' @examples
@@ -131,6 +130,8 @@ get_platforms <- function(groups = NULL) {
 #' Delete an existing platform
 #'
 #' @param id The platfrom id
+#' @param cascade Logical. Should the deletion take place even if the platform is referenced by other objects.
+#'
 #' @return The status code of request.
 #' \itemize{
 #'   \item 200 OK

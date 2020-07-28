@@ -6,6 +6,9 @@
 \usage{
 get_baseimage(id)
 }
+\arguments{
+\item{id}{A baseimage id}
+}
 \value{
 A list for base image
 }

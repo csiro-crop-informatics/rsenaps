@@ -6,6 +6,9 @@
 \usage{
 count_streams(groups = NULL)
 }
+\arguments{
+\item{groups}{A vector of strings of group ids}
+}
 \value{
 Number of streams
 }

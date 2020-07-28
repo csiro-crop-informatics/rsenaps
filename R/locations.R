@@ -1,6 +1,3 @@
-# * Author:    Bangyou Zheng (Bangyou.Zheng@csiro.au)
-# * Created:   03:40 PM Saturday, 09 June 2018
-# * Copyright: AS IS
 
 
 
@@ -63,13 +60,14 @@ get_location <- function(id) {
 
 #' Create a new location into Senaps
 #'
-#' @param id The id of new location. Have to be unique
+#' @param id The id of new location. Must be unique
 #' @param description The description of new location
 #' @param organisation The organisation of new location. Have to be an existing organisation
 #' @param longitude The longitude (degree)
 #' @param latitude The latitude (degree)
 #' @param elevation The elevation above sea level (m, optional)
 #' @param groups The list of groups. Have to be an existing group (optional)
+#' @param usermetadata User metadata values
 #'
 #' @return A list of new location if the new location is successfully created
 #' @export

@@ -6,8 +6,11 @@
 \usage{
 get_model(id)
 }
+\arguments{
+\item{id}{A model id}
+}
 \value{
-TODO: A list of model meta data
+A list of model meta data
 }
 \description{
 The model detail information in the Senaps
