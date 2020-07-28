@@ -19,6 +19,8 @@ get_baseimages <- function() {
 
 #' The base image in the Senaps
 #'
+#' @param id A baseimage id
+#'
 #' @return A list for base image
 #' @export
 get_baseimage <- function(id) {

@@ -6,6 +6,9 @@
 \usage{
 get_platforms(groups = NULL)
 }
+\arguments{
+\item{groups}{A list of group ids}
+}
 \value{
 A data frame with all streamids
 }
