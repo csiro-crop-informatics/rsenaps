@@ -1,7 +1,7 @@
 Package: RSenaps
 Type: Package
 Title: An R Package for the Senaps API
-Version: 0.1.0.116
+Version: 0.2.0
 Authors@R: c(
     person("Bangyou", "Zheng", , "bangyou.zheng@csiro.au", role = c("aut", "cre"), 
         comment = c(ORCID = "0000-0003-1551-0970")),
