@@ -1,12 +1,13 @@
-# * Author:    Bangyou Zheng (Bangyou.Zheng@csiro.au)
-# * Created:   03:40 PM Saturday, 09 June 2018
-# * Copyright: AS IS
-
-
-
 #' The all groups in the Senaps
 #'
-#' @return A data frame with all groups
+#' @param id Only return groups with this id or that match the pattern. Accepts * and ? wildcards
+#' @param organisation An organisation id
+#' @param groups A list of group ids to filter by
+#' @param expand Logical. Should the response object be expanded?
+#' @param usermetadatafield The field in the usermetadata you'd like to filter by
+#' @param usermetadatavalues Values to filter the response by in the usermetadatafield
+#'
+#' @return A character vector or named list, depending on expand value
 #' @export
 get_groups <- function(id = NULL,
                        organisation = NULL,
@@ -137,6 +138,7 @@ delete_group <- function(id, cascade = FALSE) {
 #' Delete a group and all children with all streams, locations and platforms associated. Use it with your own risk.
 #'
 #' @param id Group id
+#' @param ask Logical. Whether to ask for confirmation or not.
 #'
 #' @export
 clean_group <- function(id, ask = TRUE) {
