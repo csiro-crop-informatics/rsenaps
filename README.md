@@ -1,6 +1,7 @@
 <!-- badges: start -->
 [![Travis build status](https://travis-ci.org/csiro-crop-informatics/rsenaps.svg?branch=master)](https://travis-ci.org/csiro-crop-informatics/rsenaps)
 [![CircleCI build status](https://circleci.com/gh/csiro-crop-informatics/rsenaps.svg?style=svg)](https://circleci.com/gh/csiro-crop-informatics/rsenaps)
+[![DOI](https://zenodo.org/badge/278291231.svg)](https://zenodo.org/badge/latestdoi/278291231)
 <!-- badges: end -->
 
 # RSenaps
