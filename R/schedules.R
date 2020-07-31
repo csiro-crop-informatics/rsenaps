@@ -1,16 +1,14 @@
-# * Author:    Bangyou Zheng (Bangyou.Zheng@csiro.au)
-# * Created:   09:29 PM Wednesday, 08 August 2018
-# * Copyright: AS IS
 
 # functions related with schedule
 
 #' Add a new schedule
 #'
-#' @param id schedule id
-#' @param type schedule type
-#' @param organisation Organisation
-#' @param group Group
-#' @param permissions A vector of of permissions
+#' @param name The schedule name
+#' @param workflow A workflow id
+#' @param cron A cron expression
+#' @param timezone Timezone
+#' @param description Description of the schedule
+#' @param active Whether the schedule is active or not
 #'
 #' @return The schedule id
 #' @export

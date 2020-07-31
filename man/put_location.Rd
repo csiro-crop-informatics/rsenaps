@@ -8,7 +8,7 @@ put_location(id, description, organisation, longitude, latitude,
   elevation = NULL, groups = character(), usermetadata = NULL)
 }
 \arguments{
-\item{id}{The id of new location. Have to be unique}
+\item{id}{The id of new location. Must be unique}
 
 \item{description}{The description of new location}
 
@@ -21,6 +21,8 @@ put_location(id, description, organisation, longitude, latitude,
 \item{elevation}{The elevation above sea level (m, optional)}
 
 \item{groups}{The list of groups. Have to be an existing group (optional)}
+
+\item{usermetadata}{User metadata values}
 }
 \value{
 A list of new location if the new location is successfully created

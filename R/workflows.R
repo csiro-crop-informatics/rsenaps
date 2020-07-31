@@ -1,10 +1,10 @@
-# * Author:    Bangyou Zheng (Bangyou.Zheng@csiro.au)
-# * Created:   03:40 PM Saturday, 09 June 2018
-# * Copyright: AS IS
 
 
 
 #' The all workflows in the Senaps
+#'
+#' @param name A workflow name. Can accept * and ? wildcards.
+#' @param groups A list of group ids to filter the search
 #'
 #' @return A list of workflows
 #' @export
@@ -13,7 +13,7 @@ get_workflows <- function(name = NULL, groups = NULL) {
     query <- list()
     if (!is.null(name)) {
         if (length(name) > 1) {
-            stop('Only support to search with one name.')
+            stop('Only a single workflow can be searched for.')
         }
         query$name <- paste0('*', name, "*")
     }
@@ -39,6 +39,8 @@ get_workflows <- function(name = NULL, groups = NULL) {
 
 
 #' The workflow detail information in the Senaps
+#'
+#' @param id A workflow id
 #'
 #' @return A list of workflow meta data
 #' @export

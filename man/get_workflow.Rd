@@ -6,6 +6,9 @@
 \usage{
 get_workflow(id)
 }
+\arguments{
+\item{id}{A workflow id}
+}
 \value{
 A list of workflow meta data
 }

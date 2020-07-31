@@ -1,9 +1,8 @@
-# * Author:    Bangyou Zheng (Bangyou.Zheng@csiro.au)
-# * Created:   03:40 PM Saturday, 09 June 2018
-# * Copyright: AS IS
 
 
 #' Count streams in the Senaps
+#'
+#' @param groups A vector of strings of group ids
 #'
 #' @return Number of streams
 #' @export
@@ -95,7 +94,6 @@ get_stream <- function(id) {
 #' Create a new stream in Senaps
 #'
 #' @param id The id of new stream. Have to be unique
-#' @param organizaton The organisation of new location. Have to be an existing organisation
 #' @param reportingPeriod Reporting frequency. TODO: Add documentation about valid format
 #' @param samplePeriod Sampling frequency. TODO: Add documentation about valid format
 #' @param observedProperty Observe property. TODO: Add documentation about valid values
@@ -104,6 +102,8 @@ get_stream <- function(id) {
 #' @param groups The list of groups. Have to be an existing group (optional)
 #' @param resulttype Types of reuls. scalarvalue in default
 #' @param interpolationType Interpolation type. Continuous in default
+#' @param organisation An organisation id
+#' @param usermetadata User metadata values
 #'
 #' @return A list of new stream if the new stream is successfully created
 #' @export

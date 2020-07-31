@@ -1,21 +1,17 @@
-# * Author:    Bangyou Zheng (Bangyou.Zheng@csiro.au)
-# * Created:   02:49 PM Monday, 17 September 2018
-# * Copyright: AS IS
 
 # Function related with tmd data
 #' Retrieving data from the NetCDF Subset Service (NCSS) in Senaps
 #'
 #' See details from https://www.unidata.ucar.edu/software/thredds/current/tds/reference/NetcdfSubsetServiceReference.html
+#'
 #' @param path The URL path at which to place the data.
 #' @param var Name of variables.
 #' @param latitude Point location. units of degrees_east, degrees_north
 #' @param longitude Point location. units of degrees_east, degrees_north
 #' @param temporal all
-#' @param accept Used to specify the returned format.
-#' Grid: netCDF and netCDF4.
-#' Point: netCDF, netCDF4, XML, CSV.
-#' Station: netCDF, netCDF4, XML, CSV, WaterML2.
 #' @param time_var The variable name of time.
+#' @param format The format to return
+#' @param tz Timezone
 #'
 #' @return The data in the NCSS
 #' @export
@@ -51,7 +47,7 @@ get_data <- function(path, var,
 
     if (format == 'csv') {
         if (length(con) == 0) {
-            stop('Not data are red which might be caused by wrong path, out range of location.')
+            stop('No data were read which might be caused by wrong path, or out range of location.')
         }
         res <- read.csv(textConnection(con), header = TRUE)
         if (!is.null(time_var)) {

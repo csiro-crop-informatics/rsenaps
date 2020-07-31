@@ -1,6 +1,3 @@
-# * Author:    Bangyou Zheng (Bangyou.Zheng@csiro.au)
-# * Created:   03:40 PM Saturday, 09 June 2018
-# * Copyright: AS IS
 
 
 #' A R package to communicate with Senaps platform.
@@ -35,8 +32,6 @@ format_datetime <- function(dt, tz = 'GMT', url_encode = FALSE) {
 #' @param method The method in the httr package, e.g. GET, POST
 #' @param path The path of request
 #' @param query The query of request
-#' @param config The config of connection. Suggest to use default method and add credential
-#' in the system environmental variables
 #' @param ... Other arguments of request
 #'
 #' @return The contents of response
