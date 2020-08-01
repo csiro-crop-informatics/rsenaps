@@ -2,7 +2,7 @@
 % Please edit documentation in R/options.R
 \name{senaps_options}
 \alias{senaps_options}
-\title{Set or get options for my package}
+\title{Set or get options for interacting with the Senaps api}
 \usage{
 senaps_options(...)
 }
@@ -10,17 +10,34 @@ senaps_options(...)
 \item{...}{Option names to retrieve option values or \code{[key]=[value]} pairs to set options.}
 }
 \description{
-Set or get options for my package
+Set or get options for interacting with the Senaps api
 }
 \section{Supported options}{
 
 The following options are supported
 \itemize{
- \item{\code{sensor_url}}{ The url for sensor API}
- \item{\code{analysis_url}}{ The url for analysis API}
- \item{\code{username}}{ The username for Senaps}
- \item{\code{password}}{ The password for Senaps}
- \item{\code{apikey}}{ The apikey for Senaps}
+ \item{\code{sensor_url}}{ Senaps Sensor Data API url}
+ \item{\code{analysis_url}}{ Senaps Analysis Service API url}
+ \item{\code{username}}{ Senaps username}
+ \item{\code{password}}{ Senaps password}
+ \item{\code{apikey}}{ Senaps API key}
 }
+}
+
+\section{Usage}{
+
+You are strongly encouraged to use an API key to authenticate with the Senaps API.
+
+Keys are available through \url{https://senaps.io/dashboard/#/app/account}.
+
+Never include your credentials in a script. Put them in a \code{.Renviron} file in the form:
+
+  \code{
+  SENAPS_APIKEY=putyourkeyhere
+  }
+
+Ensure that the .Renviron file is added to your .gitignore so that the credentials are not added to version control.
+
+The API key can then be set with: \code{senaps_options(Sys.getenv('SENAPS_APIKEY'))}
 }
 

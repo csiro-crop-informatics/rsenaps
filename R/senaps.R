@@ -70,7 +70,7 @@ request <- function(method,
                                                    SENAPS_OPTIONS('password')),
                            query = query, ...)
     } else {
-        stop('apikey or username/password should be specified.')
+        stop('apikey or username/password should be specified using senaps_options(). See ?senaps_options for help')
     }
     response
 }
