@@ -4,3 +4,4 @@
 ^\.travis\.yml$
 ^\.circleci$
 ^\.circleci/config\.yml$
+^codecov\.yml$
