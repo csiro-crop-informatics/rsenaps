@@ -6,7 +6,7 @@ author:
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteIndexEntry{Using RSenaps}
   %\VignetteEngine{knitr::rmarkdown}
   \usepackage[utf8]{inputenc}
 ---
@@ -19,7 +19,9 @@ knitr::opts_chunk$set(
 library(RSenaps)
 ```
 
+# Getting started
 
+Ensure you have setup an [API key](https://github.com/csiro-crop-informatics/rsenaps#authentication).
 
 # Sensor Data
 
