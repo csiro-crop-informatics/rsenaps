@@ -14,3 +14,5 @@ r_binary_packages:
   - purrr
   - jsonlite
   - stringi
+after_success:
+  - Rscript -e 'covr::codecov()'

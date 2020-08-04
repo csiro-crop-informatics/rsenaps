@@ -3,6 +3,7 @@
 [![CircleCI build status](https://circleci.com/gh/csiro-crop-informatics/rsenaps.svg?style=svg)](https://circleci.com/gh/csiro-crop-informatics/rsenaps)
 [![DOI](https://zenodo.org/badge/278291231.svg)](https://zenodo.org/badge/latestdoi/278291231)
 [![R build status](https://github.com/csiro-crop-informatics/rsenaps/workflows/R-CMD-check/badge.svg)](https://github.com/csiro-crop-informatics/rsenaps/actions)
+[![Codecov test coverage](https://codecov.io/gh/csiro-crop-informatics/rsenaps/branch/master/graph/badge.svg)](https://codecov.io/gh/csiro-crop-informatics/rsenaps?branch=master)
 <!-- badges: end -->
 
 # RSenaps
