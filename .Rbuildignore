@@ -4,3 +4,6 @@
 ^\.travis\.yml$
 ^\.circleci$
 ^\.circleci/config\.yml$
+^doc$
+^Meta$
+^\.github$
