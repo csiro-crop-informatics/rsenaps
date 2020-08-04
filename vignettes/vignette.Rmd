@@ -1,14 +1,12 @@
 ---
 title: "Using the Senaps API from R with RSenaps"
-author: 
-  - "Bangyou Zheng"
-  - "Alex Whan"
+author: "Bangyou Zheng"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Vignette Title}
   %\VignetteEngine{knitr::rmarkdown}
-  %\VignetteEncoding{UTF-8}
+  \usepackage[utf8]{inputenc}
 ---
 
 ```{r setup, include = FALSE}
@@ -31,7 +29,7 @@ The API accepts authentication with either an API key, or username/password. It 
 
 Regardless of which you use, never store credentials in a script, or commit them to a version control repository.
 
-The best way to manage your credentials is with an environment variable, the a `.Renviron` file. Create the `.Renviron` file in root of your directory with contents of the structure:
+The best way to manage your credentials is with an environment variable, through a `.Renviron` file. Create the `.Renviron` file in root of your directory with contents of the structure:
 
 `SENAPS_APIKEY=putyourkeyhere`
 
