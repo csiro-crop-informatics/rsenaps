@@ -4,25 +4,27 @@
 \alias{local_senaps}
 \title{Test if execution is local}
 \usage{
-local_senaps()
+local_senaps(set_local = FALSE)
+}
+\arguments{
+\item{set_local}{A logical value. Should the local environment be set to TRUE?}
 }
 \value{
 logical
 }
 \description{
-This function looks for the environment variable SENAPS_LOCAL, which must be set for the function to return TRUE
+This function looks for the environment variable SENAPS_LOCAL, and if it set to TRUE, the function will return TRUE.
 }
 \details{
-The easiest way to set the variable is with the helper function \code{set_local()}, which will set
-write the variable into a .Renviron file.
+The easiest way to set the variable interactively is with the \code{set_local} argument to this
+function \code{local_senaps(set_local = TRUE)}, which will set the variable for the session.
 
-Alternatively, the variable can be set in a session with \code{Sys.setenv("SENAPS_LOCAL"=TRUE)},
-or manually added to a .Renviron file.
+Alternatively, the variable can be set in a .Renviron file with \code{SENAPS_LOCAL=TRUE)}.
 }
 \examples{
 \donttest{
   if(local_senaps()) {
-    # some logic to do locally
+    # some logic to do locally, but not when running on Senaps
   }
 }
 }
