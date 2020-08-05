@@ -20,7 +20,18 @@
 #' }
 local_senaps <- function(set_local = FALSE) {
     # Look to see if the environment variable is already set, and if so, return true
-    if(isTRUE(as.logical(Sys.getenv("SENAPS_LOCAL")))) {
+    env_local <- tolower(Sys.getenv("SENAPS_LOCAL"))
+
+    # Assume false if SENAPS_LOCAL is not equal to true or false
+    is_local <- FALSE
+    if (env_local %in% c('true', 'false')) {
+        is_local <- as.logical(env_local)
+    } else {
+        message("\nSENAPS_LOCAL environment variable is set to FALSE/TRUE, will assume running on Senaps.\n")
+        return (FALSE)
+    }
+
+    if(is_local) {
         return(TRUE)
     } else {
 
@@ -32,14 +43,8 @@ local_senaps <- function(set_local = FALSE) {
             return(TRUE)
 
         } else {
-
-            if(isFALSE(as.logical(Sys.getenv("SENAPS_LOCAL")))) {
-                message("\nSENAPS_LOCAL environment variable is set to FALSE, will assume running on Senaps.\n")
-                return(FALSE)
-            } else {
-                message("\nThere is no SENAPS_LOCAL environment variable set, will assume running on Senaps.\n")
-                return(FALSE)
-            }
+            message("\nSENAPS_LOCAL environment variable is set to FALSE, will assume running on Senaps.\n")
+            return(FALSE)
         }
 
     }

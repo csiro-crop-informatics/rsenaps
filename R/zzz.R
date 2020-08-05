@@ -1,7 +1,7 @@
 .onLoad <- function(libname, pkgname) {
 
     senaps.local <- local_senaps()
-    if(senaps.local & !is.null(Sys.getenv("SENAPS_APIKEY"))) {
+    if(senaps.local && !is.null(Sys.getenv("SENAPS_APIKEY"))) {
         senaps_options(apikey = Sys.getenv("SENAPS_APIKEY"))
         message("RSenaps is running locally and the API key has been set to the environment variable SENAPS_APIKEY\n")
     } else {
