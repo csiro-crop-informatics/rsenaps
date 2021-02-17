@@ -4,8 +4,14 @@
 \alias{put_schedule}
 \title{Add a new schedule}
 \usage{
-put_schedule(name, workflow, cron = "0 */1 * * *", timezone = "UTC",
-  description = name, active = TRUE)
+put_schedule(
+  name,
+  workflow,
+  cron = "0 */1 * * *",
+  timezone = "UTC",
+  description = name,
+  active = TRUE
+)
 }
 \arguments{
 \item{name}{The schedule name}

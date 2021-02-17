@@ -4,8 +4,16 @@
 \alias{put_location}
 \title{Create a new location into Senaps}
 \usage{
-put_location(id, description, organisation, longitude, latitude,
-  elevation = NULL, groups = character(), usermetadata = NULL)
+put_location(
+  id,
+  description,
+  organisation,
+  longitude,
+  latitude,
+  elevation = NULL,
+  groups = character(),
+  usermetadata = NULL
+)
 }
 \arguments{
 \item{id}{The id of new location. Must be unique}

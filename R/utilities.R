@@ -1,4 +1,9 @@
 
+# A wrapper function for stop for status
+.stop_for_status <- function(response) {
+    httr::stop_for_status(response)
+}
+
 #' Auto unbox a list
 #'
 #' @param x the list

@@ -4,9 +4,14 @@
 \alias{get_groups}
 \title{The all groups in the Senaps}
 \usage{
-get_groups(id = NULL, organisation = NULL, groups = NULL,
-  expand = FALSE, usermetadatafield = NULL,
-  usermetadatavalues = NULL)
+get_groups(
+  id = NULL,
+  organisation = NULL,
+  groups = NULL,
+  expand = FALSE,
+  usermetadatafield = NULL,
+  usermetadatavalues = NULL
+)
 }
 \arguments{
 \item{id}{Only return groups with this id or that match the pattern. Accepts * and ? wildcards}
