@@ -71,7 +71,7 @@ get_observations <- function(streamid,
             response <- httr::content(req)
             res <- response$results %>%
                 map_df(function(x) {
-                    data_frame(timestamp = x$t, value = x$v$v)
+                    tibble::tibble(timestamp = x$t, value = x$v$v)
                 })
             rm(req)
             rm(response)

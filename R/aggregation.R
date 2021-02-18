@@ -85,7 +85,7 @@ get_aggregation <- function(streamid,
             response <- httr::content(req)
             res <- response$results %>%
                 map_df(function(x) {
-                    data_frame(timestamp = x$t,
+                    tibble::tibble(timestamp = x$t,
                                avg = x$v$avg,
                                min = x$v$min,
                                max = x$v$max,
