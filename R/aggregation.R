@@ -102,7 +102,7 @@ get_aggregation <- function(streamid,
                 tz = tz)
             k <- k + 1
             result[[k]] <- res
-            if (nrow(res) < query$limit) {
+            if (nrow(res) <= query$limit) {
                 break
             } else {
                 query$start <- format_datetime(res$timestamp[nrow(res)], tz = tz)
