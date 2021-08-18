@@ -1,0 +1,59 @@
+---
+title: "Using the Senaps API from R with RSenaps"
+author: 
+  - "Bangyou Zheng"
+  - "Alex Whan"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Using RSenaps}
+  %\VignetteEngine{knitr::rmarkdown}
+  \usepackage[utf8]{inputenc}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+library(RSenaps)
+```
+
+RSenaps is used to communicate with [Senaps](https://senaps.io/) platform. 
+
+# Getting started
+
+Before you can start to use RSenaps, you have to create an account on [Senaps](https://senaps.io/). There are two ways to authenticate with [Senaps](https://senaps.io/).
+
+* Username and password
+* APIKEY
+
+You can follow the [instruction](https://cran.r-project.org/web/packages/httr/vignettes/secrets.html) to securely store secrets in R. We suggest you to use APIKEY for authentication as security season and store the credentials in the `.Renviron` file as the environment variable. 
+
+Before you start my API call in RSenaps, `senaps_options` has to be called to setup up credentials if you store your username, password or apikey in the `.Renviron` file.
+
+```r
+# Use username and password
+senaps_options(username = Sys.getenv("SENAPS_USERNAME"),
+               password = Sys.getenv("SENAPS_PASSWORD"))
+
+# Use APIKEY
+senaps_options(apikey = Sys.getenv("SENAPS_APIKEY"))
+```
+
+The credentials are stored in the sessions using `settings` packages and used in the further API call.
+
+# Sensor Data
+
+## Accessing sensor observations
+
+
+# Data Service
+
+## Downloading data
+
+## Uploading data
+
+# Analytics Service
+
+## Uploading a model
