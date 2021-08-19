@@ -133,16 +133,17 @@ put_observations <- function(id, timestamp, value) {
     }
     df <- mapply(function(t, v) list(t=t, v=list(v=v)), df[[1]], df[[2]], SIMPLIFY=
                      FALSE)
+    names(df) <- NULL
 
-
-    response <- request(POST, path = 'observations',
+    json <- jsonlite::toJSON(list(results = df), auto_unbox = TRUE)
+    response <- request(httr::POST, path = 'observations',
                         query = list(streamid = id),
-                        body = jsonlite::toJSON(list(results = df), auto_unbox = TRUE),
+                        body = json,
                         encode = 'json')
-    status <- status_code(response)
+    status <- httr::status_code(response)
 
     if (status != 201) {
-        stop(http_status(response)$message)
+        stop(httr::http_status(response)$message)
     }
 
 }
