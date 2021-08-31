@@ -4,3 +4,7 @@
 ^\.travis\.yml$
 ^\.circleci$
 ^\.circleci/config\.yml$
+^_pkgdown\.yml$
+^docs$
+^pkgdown$
+^\.github$

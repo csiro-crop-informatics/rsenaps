@@ -47,9 +47,10 @@ request <- function(method,
 
     host <- NULL
     if (commands %in% c("streams", "groups", "observations",
-                        "locations", "platforms", "roles")) {
+                        "locations", "platforms", "roles", "aggregation")) {
         host <- SENAPS_OPTIONS("sensor_url")
-    } else if (commands %in% c("base-images", "models", "workflows", 'schedules')) {
+    } else if (commands %in% c("base-images", "models", "workflows", 'schedules',
+                               "jobs")) {
         host <- SENAPS_OPTIONS("analysis_url")
     } else if (commands %in% c('data')) {
         host <- SENAPS_OPTIONS("tmd_url")

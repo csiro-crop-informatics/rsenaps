@@ -4,8 +4,14 @@
 \alias{put_group}
 \title{Create a new group into Senaps}
 \usage{
-put_group(id, name, description, organisation, groups = NULL,
-  usermetadata = NULL)
+put_group(
+  id,
+  name,
+  description,
+  organisation,
+  groups = NULL,
+  usermetadata = NULL
+)
 }
 \arguments{
 \item{id}{The new group unique id}

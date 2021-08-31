@@ -4,8 +4,16 @@
 \alias{get_data}
 \title{Retrieving data from the NetCDF Subset Service (NCSS) in Senaps}
 \usage{
-get_data(path, var, latitude = NULL, longitude = NULL,
-  temporal = "all", format = NULL, tz = "UTC", time_var = NULL)
+get_data(
+  path,
+  var,
+  latitude = NULL,
+  longitude = NULL,
+  temporal = "all",
+  format = NULL,
+  tz = "UTC",
+  time_var = NULL
+)
 }
 \arguments{
 \item{path}{The URL path at which to place the data.}

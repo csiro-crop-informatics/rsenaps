@@ -4,10 +4,19 @@
 \alias{put_stream}
 \title{Create a new stream in Senaps}
 \usage{
-put_stream(id, organisation, reportingPeriod, samplePeriod,
-  observedProperty, unitOfMeasure, location = NULL,
-  groups = character(), resulttype = "scalarvalue",
-  interpolationType = "Continuous", usermetadata = NULL)
+put_stream(
+  id,
+  organisation,
+  reportingPeriod,
+  samplePeriod,
+  observedProperty,
+  unitOfMeasure,
+  location = NULL,
+  groups = character(),
+  resulttype = "scalarvalue",
+  interpolationType = "Continuous",
+  usermetadata = NULL
+)
 }
 \arguments{
 \item{id}{The id of new stream. Have to be unique}

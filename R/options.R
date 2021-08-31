@@ -2,9 +2,9 @@
 
 # Variable, global to package's namespace.
 # This function is not exported to user space and does not need to be documented.
-SENAPS_OPTIONS <- settings::options_manager(sensor_url = 'https://sensor-cloud.io/api/sensor/v2/',
-                                  analysis_url = 'https://sensor-cloud.io/api/analysis/',
-                                  tmd_url = "https://sensor-cloud.io/thredds/ncss/",
+SENAPS_OPTIONS <- settings::options_manager(sensor_url = 'https://senaps.io/api/sensor/v2/',
+                                  analysis_url = 'https://senaps.io/api/analysis/',
+                                  tmd_url = "https://senaps.io/thredds/ncss/",
                                   username = '',
                                   password = '',
                                   apikey = '')

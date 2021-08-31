@@ -4,8 +4,15 @@
 \alias{put_platform}
 \title{Create a new platform or update an existing platform}
 \usage{
-put_platform(id, name = id, organisation, groups = NULL,
-  streams = NULL, deployments = NULL, usermetadata = NULL)
+put_platform(
+  id,
+  name = id,
+  organisation,
+  groups = NULL,
+  streams = NULL,
+  deployments = NULL,
+  usermetadata = NULL
+)
 }
 \arguments{
 \item{id}{Platform ID. Have to be unique}
