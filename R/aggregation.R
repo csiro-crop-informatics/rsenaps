@@ -18,7 +18,8 @@ get_aggregation <- function(streamid,
                              si = TRUE,
                              ei = TRUE,
                              tz = "GMT",
-                             limit = 1000) {
+                             limit = 1000,
+                             name_streams = FALSE) {
     # Check the length of streamid
     if (length(streamid) > 1) {
         stop('Only 1 stream is supported.')
@@ -93,12 +94,18 @@ get_aggregation <- function(streamid,
                 })
             rm(req)
             rm(response)
+            if (name_streams) {
+                names(res)[names(res) == 'avg'] <- paste(streamid, '.avg', sep='')
+                names(res)[names(res) == 'min'] <- paste(streamid, '.min', sep='')
+                names(res)[names(res) == 'max'] <- paste(streamid, '.max', sep='')
+                names(res)[names(res) == 'count'] <- paste(streamid, '.count', sep='')
+            }
             if (nrow(res) == 0) {
                 break
             }
             res$timestamp <- lubridate::with_tz(
                 as.POSIXct(res$timestamp,
-                           format = "%Y-%m-%dT%H:%M:%OS", tz = 'GMT'),
+                           format = "%Y-%m-%dT%H:%M:%OSZ", tz = 'GMT'),
                 tz = tz)
             k <- k + 1
             result[[k]] <- res
