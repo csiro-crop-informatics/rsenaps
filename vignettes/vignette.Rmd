@@ -26,7 +26,7 @@ A user account needs to be created in [Senaps](http://sensor-cloud.io). It it mu
 
 The `apikey` can be set using `senaps_option`.
 
-```{r}
+```{r setup, echo=FALSE}
 senaps_options(apikey = Sys.getenv('SENAPS_API_KEY'))
 ```
 
