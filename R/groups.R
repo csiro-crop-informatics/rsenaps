@@ -63,7 +63,7 @@ get_groups <- function(id = NULL,
 #' @return list of group meta data. NULL if group doesn't exist
 #' @export
 get_group <- function(id, recursive = FALSE) {
-    response <- request(GET, paste0('groups/', id), recursive = TRUE)
+    response <- request(httr::GET, paste0('groups/', id), recursive = TRUE)
     status <- httr::status_code(response)
     if (!(status %in% c(200))) {
         return(NULL)
@@ -73,8 +73,8 @@ get_group <- function(id, recursive = FALSE) {
     res$id <- response$id
     res$name <- response$name
     res$description <- response$description
-    res$organisation <- map_chr(response$`_embedded`$organisation, 'id')
-    res$groups <- map_chr(response$`_embedded`$groups, 'id')
+    res$organisation <- purrr::map_chr(response$`_embedded`$organisation, 'id')
+    res$groups <- purrr::map_chr(response$`_embedded`$groups, 'id')
     res$usermetadata <- response$usermetadata
     res
 }
@@ -106,7 +106,7 @@ put_group <- function(id, name, description, organisation, groups = NULL,
                  description = jsonlite::unbox(description),
                  groupids = groups,
                  usermetadata = usermetadata)
-    response <- request(POST, path = paste0('groups/', id),
+    response <- request(httr::POST, path = paste0('groups/', id),
                         body = jsonlite::toJSON(body, auto_unbox = FALSE,
                                                 null = 'null'),
                         encode = 'json')
@@ -126,10 +126,10 @@ put_group <- function(id, name, description, organisation, groups = NULL,
 #' @return The staus code of delete
 #' @export
 delete_group <- function(id, cascade = FALSE) {
-    response <- request(DELETE, path = paste0('groups/', id),
+    response <- request(httr::DELETE, path = paste0('groups/', id),
                         query = list(cascade = cascade))
-    status <- status_code(response)
-    status
+    .stop_for_status(response)
+    return(TRUE)
 }
 
 
