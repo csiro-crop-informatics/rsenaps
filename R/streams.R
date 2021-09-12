@@ -55,16 +55,9 @@ get_streams <- function(groups = NULL,
 #' @return A list of steam meta information
 #' @export
 get_stream <- function(id) {
-    response <- request(GET, paste0('streams/', id))
+    response <- request(httr::GET, paste0('streams/', id))
 
-    status <- status_code(response)
-    if (status == 404) {
-        return(NULL)
-    }
-
-    if (status != 200) {
-        stop(http_status(response)$message)
-    }
+    .stop_for_status(response)
     contents <- httr::content(response)
     res <- list()
 
@@ -151,16 +144,12 @@ put_stream <- function(id, organisation,
                  usermetadata = usermetadata)
 
 
-    response <- request(POST, path = paste0('streams/', id),
+    response <- request(httr::POST, path = paste0('streams/', id),
                         body = jsonlite::toJSON(body, auto_unbox = FALSE,
                                                 null = 'null'),
                         encode = 'json')
-    status <- status_code(response)
-
-    if (!(status %in% c(200, 201))) {
-        stop(http_status(response)$message)
-    }
-    return (TRUE)
+    .stop_for_status(response)
+    return(TRUE)
 }
 
 
@@ -171,8 +160,8 @@ put_stream <- function(id, organisation,
 #' @return The status code of request
 #' @export
 delete_stream <- function(id) {
-    response <- request(DELETE, path = paste0('streams/', id))
-    status <- status_code(response)
-    status
+    response <- request(httr::DELETE, path = paste0('streams/', id))
+    .stop_for_status(response)
+    return(TRUE)
 }
 
