@@ -4,12 +4,30 @@
 \alias{get_groups}
 \title{The all groups in the Senaps}
 \usage{
-get_groups(id = NULL, organisation = NULL, groups = NULL,
-  expand = FALSE, usermetadatafield = NULL,
-  usermetadatavalues = NULL)
+get_groups(
+  id = NULL,
+  organisation = NULL,
+  groups = NULL,
+  expand = FALSE,
+  usermetadatafield = NULL,
+  usermetadatavalues = NULL
+)
+}
+\arguments{
+\item{id}{Only return groups with this id or that match the pattern. Accepts * and ? wildcards}
+
+\item{organisation}{An organisation id}
+
+\item{groups}{A list of group ids to filter by}
+
+\item{expand}{Logical. Should the response object be expanded?}
+
+\item{usermetadatafield}{The field in the usermetadata you'd like to filter by}
+
+\item{usermetadatavalues}{Values to filter the response by in the usermetadatafield}
 }
 \value{
-A data frame with all groups
+A character vector or named list, depending on expand value
 }
 \description{
 The all groups in the Senaps

@@ -1,6 +1,3 @@
-# * Author:    Bangyou Zheng (Bangyou.Zheng@csiro.au)
-# * Created:   03:40 PM Saturday, 09 June 2018
-# * Copyright: AS IS
 
 
 
@@ -22,7 +19,9 @@ get_models <- function() {
 
 #' The model detail information in the Senaps
 #'
-#' @return TODO: A list of model meta data
+#' @param id A model id
+#'
+#' @return A list of model meta data
 #' @export
 get_model <- function(id) {
     response <- request(GET, paste0('models/', id))

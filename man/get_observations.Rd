@@ -4,8 +4,16 @@
 \alias{get_observations}
 \title{Get a collection of observations}
 \usage{
-get_observations(streamid, start = NULL, end = NULL, si = TRUE,
-  ei = TRUE, tz = "GMT", descending = FALSE, limit = 1000)
+get_observations(
+  streamid,
+  start = NULL,
+  end = NULL,
+  si = TRUE,
+  ei = TRUE,
+  tz = "GMT",
+  descending = FALSE,
+  limit = 1000
+)
 }
 \arguments{
 \item{streamid}{Stream identifier or a comma separated list of stream identifiers}

@@ -1,14 +1,31 @@
 Package: RSenaps
 Type: Package
-Title: R Package for Senaps
-Version: 0.1.0.116
-Author: Bangyou Zheng
-Maintainer: Bangyou Zheng <Bangyou.Zheng@csiro.au>
-Description: R package to access Senaps platform
-License: As IS
+Title: An R Package for the Senaps API
+Version: 0.2.0
+Authors@R: c(
+    person("Bangyou", "Zheng", , "bangyou.zheng@csiro.au", role = c("aut", "cre"), 
+        comment = c(ORCID = "0000-0003-1551-0970")),
+    person("Alex", "Whan", , "alex.whan@csiro.au", role = c("aut"),
+        comment = c(ORCID = "0000-0002-6839-2915"))
+    )
+Description: An R package to access the Senaps (senaps.io) API.
+License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 6.1.1
-Suggests: knitr,
-    rmarkdown
+RoxygenNote: 7.1.1
+Depends:
+    R (>= 3.0.0)
+Suggests:
+    knitr,
+    rmarkdown,
+    testthat (>= 2.1.0)
+Imports: 
+    httr,
+    dplyr,
+    tibble,
+    purrr,
+    jsonlite,
+    settings,
+    magrittr,
+    lubridate
 VignetteBuilder: knitr

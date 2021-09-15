@@ -4,19 +4,27 @@
 \alias{put_schedule}
 \title{Add a new schedule}
 \usage{
-put_schedule(name, workflow, cron = "0 */1 * * *", timezone = "UTC",
-  description = name, active = TRUE)
+put_schedule(
+  name,
+  workflow,
+  cron = "0 */1 * * *",
+  timezone = "UTC",
+  description = name,
+  active = TRUE
+)
 }
 \arguments{
-\item{id}{schedule id}
+\item{name}{The schedule name}
 
-\item{type}{schedule type}
+\item{workflow}{A workflow id}
 
-\item{organisation}{Organisation}
+\item{cron}{A cron expression}
 
-\item{group}{Group}
+\item{timezone}{Timezone}
 
-\item{permissions}{A vector of of permissions}
+\item{description}{Description of the schedule}
+
+\item{active}{Whether the schedule is active or not}
 }
 \value{
 The schedule id

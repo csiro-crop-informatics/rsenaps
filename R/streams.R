@@ -1,9 +1,8 @@
-# * Author:    Bangyou Zheng (Bangyou.Zheng@csiro.au)
-# * Created:   03:40 PM Saturday, 09 June 2018
-# * Copyright: AS IS
 
 
 #' Count streams in the Senaps
+#'
+#' @param groups A vector of strings of group ids
 #'
 #' @return Number of streams
 #' @export
@@ -21,13 +20,26 @@ count_streams <- function(groups = NULL) {
 
 #' The all streams in the Senaps
 #'
+#' @param groups A group id (optional)
+#' @param observed_property An observed property uri
+#' @param limit Maximum records to retrieve
+#'
 #' @return A data frame with all streamids
 #' @export
-get_streams <- function(groups = NULL, limit = 1000) {
+
+get_streams <- function(groups = NULL,
+                        observed_property = NULL,
+                        limit = 1000) {
     query <- list(limit = limit)
+
     if (!is.null(groups)) {
-        query <- list(groupids = groups)
+        query$groupids <- groups
     }
+
+    if (!is.null(observed_property)) {
+        query$streamMetadata.observedProperty = observed_property
+    }
+
     response <- request(GET, 'streams', query = query)
     httr::stop_for_status(response)
     contents <- httr::content(response)
@@ -43,16 +55,9 @@ get_streams <- function(groups = NULL, limit = 1000) {
 #' @return A list of steam meta information
 #' @export
 get_stream <- function(id) {
-    response <- request(GET, paste0('streams/', id))
+    response <- request(httr::GET, paste0('streams/', id))
 
-    status <- status_code(response)
-    if (status == 404) {
-        return(NULL)
-    }
-
-    if (status != 200) {
-        stop(http_status(response)$message)
-    }
+    .stop_for_status(response)
     contents <- httr::content(response)
     res <- list()
 
@@ -61,7 +66,7 @@ get_stream <- function(id) {
     res$organisationid <- map_chr(contents$`_embedded`$organisation, 'id')
     res$groupids <- map_chr(contents$`_embedded`$groups, 'id')
     if (!is.null(contents$`_embedded`$location)) {
-        res$localtionid <- map_chr(contents$`_embedded`$location, 'id')
+        res$locationid <- map_chr(contents$`_embedded`$location, 'id')
     }
     res$reportingPeriod <- contents$reportingPeriod
     res$samplePeriod <- contents$samplePeriod
@@ -82,7 +87,6 @@ get_stream <- function(id) {
 #' Create a new stream in Senaps
 #'
 #' @param id The id of new stream. Have to be unique
-#' @param organizaton The organisation of new location. Have to be an existing organisation
 #' @param reportingPeriod Reporting frequency. TODO: Add documentation about valid format
 #' @param samplePeriod Sampling frequency. TODO: Add documentation about valid format
 #' @param observedProperty Observe property. TODO: Add documentation about valid values
@@ -91,6 +95,8 @@ get_stream <- function(id) {
 #' @param groups The list of groups. Have to be an existing group (optional)
 #' @param resulttype Types of reuls. scalarvalue in default
 #' @param interpolationType Interpolation type. Continuous in default
+#' @param organisation An organisation id
+#' @param usermetadata User metadata values
 #'
 #' @return A list of new stream if the new stream is successfully created
 #' @export
@@ -138,17 +144,12 @@ put_stream <- function(id, organisation,
                  usermetadata = usermetadata)
 
 
-    response <- request(POST, path = paste0('streams/', id),
+    response <- request(httr::POST, path = paste0('streams/', id),
                         body = jsonlite::toJSON(body, auto_unbox = FALSE,
                                                 null = 'null'),
                         encode = 'json')
-    status <- status_code(response)
-
-    if (!(status %in% c(200, 201))) {
-        stop("Error to create stream. The HTTP status error is \"",  http_status(response)$message,
-             "\". The response error is \"", content(response)$message, "\"")
-    }
-    return (TRUE)
+    .stop_for_status(response)
+    return(TRUE)
 }
 
 
@@ -159,8 +160,8 @@ put_stream <- function(id, organisation,
 #' @return The status code of request
 #' @export
 delete_stream <- function(id) {
-    response <- request(DELETE, path = paste0('streams/', id))
-    status <- status_code(response)
-    status
+    response <- request(httr::DELETE, path = paste0('streams/', id))
+    .stop_for_status(response)
+    return(TRUE)
 }
 

@@ -1,6 +1,3 @@
-# * Author:    Bangyou Zheng (Bangyou.Zheng@csiro.au)
-# * Created:   03:40 PM Saturday, 09 June 2018
-# * Copyright: AS IS
 
 
 #' Get a collection of observations
@@ -13,6 +10,9 @@
 #' @param tz The timezone of timestamp. GMT/UTC time in default
 #' @param descending Sort the results. By default results are returned in ascending order.
 #' @param limit Limit the number of results. The limit is 1000 by default.
+#' @param name_streams when TRUE, the returned value column name is the stream id which will facilitate future queries to return multiple streams.
+#           Default is FALSE so existing code does not break.  
+#           Please set this to TRUE for future applications to avoid breaking changes in the future.
 #' @export
 get_observations <- function(streamid,
                              start = NULL,
@@ -21,7 +21,12 @@ get_observations <- function(streamid,
                              ei = TRUE,
                              tz = "GMT",
                              descending = FALSE,
-                             limit = 1000) {
+                             limit = 1000,
+                             name_streams = FALSE) {
+    if (!name_streams) {
+        warning('To support multistream downloads, this data format will be depricated.  Please modify code to use name_streams = TRUE')
+    }
+
     # Check the length of streamid
     if (length(streamid) > 1) {
         stop('Only 1 stream is supported.')
@@ -74,20 +79,23 @@ get_observations <- function(streamid,
             response <- httr::content(req)
             res <- response$results %>%
                 map_df(function(x) {
-                    data_frame(timestamp = x$t, value = x$v$v)
+                    tibble::tibble(timestamp = x$t, value = x$v$v)
                 })
             rm(req)
             rm(response)
+            if (name_streams) {
+                names(res)[names(res) == 'value'] <- streamid
+            }
             if (nrow(res) == 0) {
                 break
             }
             res$timestamp <- lubridate::with_tz(
                 as.POSIXct(res$timestamp,
-                           format = "%Y-%m-%dT%H:%M:%OS", tz = 'GMT'),
+                           format = "%Y-%m-%dT%H:%M:%OSZ", tz = 'GMT'),
                 tz = tz)
             k <- k + 1
             result[[k]] <- res
-            if (nrow(res) < query$limit) {
+            if (nrow(res) <= query$limit) {
                 break
             } else {
                 query$start <- format_datetime(res$timestamp[nrow(res)], tz = tz)
@@ -136,16 +144,17 @@ put_observations <- function(id, timestamp, value) {
     }
     df <- mapply(function(t, v) list(t=t, v=list(v=v)), df[[1]], df[[2]], SIMPLIFY=
                      FALSE)
+    names(df) <- NULL
 
-
-    response <- request(POST, path = 'observations',
+    json <- jsonlite::toJSON(list(results = df), auto_unbox = TRUE)
+    response <- request(httr::POST, path = 'observations',
                         query = list(streamid = id),
-                        body = jsonlite::toJSON(list(results = df), auto_unbox = TRUE),
+                        body = json,
                         encode = 'json')
-    status <- status_code(response)
+    status <- httr::status_code(response)
 
     if (status != 201) {
-        stop(http_status(response)$message)
+        stop(httr::http_status(response)$message)
     }
 
 }
@@ -163,4 +172,3 @@ delete_observations <- function(id) {
     status <- status_code(response)
     status
 }
-

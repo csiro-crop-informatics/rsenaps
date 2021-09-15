@@ -8,6 +8,8 @@ clean_group(id, ask = TRUE)
 }
 \arguments{
 \item{id}{Group id}
+
+\item{ask}{Logical. Whether to ask for confirmation or not.}
 }
 \description{
 Delete a group and all children with all streams, locations and platforms associated. Use it with your own risk.

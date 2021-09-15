@@ -8,6 +8,8 @@ delete_platform(id, cascade = FALSE)
 }
 \arguments{
 \item{id}{The platfrom id}
+
+\item{cascade}{Logical. Should the deletion take place even if the platform is referenced by other objects.}
 }
 \value{
 The status code of request.

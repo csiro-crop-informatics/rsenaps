@@ -4,8 +4,16 @@
 \alias{get_data}
 \title{Retrieving data from the NetCDF Subset Service (NCSS) in Senaps}
 \usage{
-get_data(path, var, latitude = NULL, longitude = NULL,
-  temporal = "all", format = NULL, tz = "UTC", time_var = NULL)
+get_data(
+  path,
+  var,
+  latitude = NULL,
+  longitude = NULL,
+  temporal = "all",
+  format = NULL,
+  tz = "UTC",
+  time_var = NULL
+)
 }
 \arguments{
 \item{path}{The URL path at which to place the data.}
@@ -18,12 +26,11 @@ get_data(path, var, latitude = NULL, longitude = NULL,
 
 \item{temporal}{all}
 
-\item{time_var}{The variable name of time.}
+\item{format}{The format to return}
 
-\item{accept}{Used to specify the returned format.
-Grid: netCDF and netCDF4.
-Point: netCDF, netCDF4, XML, CSV.
-Station: netCDF, netCDF4, XML, CSV, WaterML2.}
+\item{tz}{Timezone}
+
+\item{time_var}{The variable name of time.}
 }
 \value{
 The data in the NCSS

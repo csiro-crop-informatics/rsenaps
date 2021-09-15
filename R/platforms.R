@@ -1,6 +1,3 @@
-# * Author:    Bangyou Zheng (Bangyou.Zheng@csiro.au)
-# * Created:   08:46 PM Thursday, 14 June 2018
-# * Copyright: AS IS
 
 #' Create a new platform or update an existing platform
 #'
@@ -90,11 +87,11 @@ get_platform <- function(id) {
     for (i in seq(along = deployments)) {
         start <- NULL
         if (!is.null(deployments[[i]]$validTime$start)) {
-            start <- as.POSIXct(deployments[[i]]$validTime$start, tz = 'GMT')
+            start <- as.POSIXct(deployments[[i]]$validTime$start, tz = 'GMT', format='%Y-%m-%dT%H:%M:%OSZ')
         }
         finish <- NULL
         if (!is.null(deployments[[i]]$validTime$finish)) {
-            finish <- as.POSIXct(deployments[[i]]$validTime$finish, tz = 'GMT')
+            finish <- as.POSIXct(deployments[[i]]$validTime$finish, tz = 'GMT', format='%Y-%m-%dT%H:%M:%OSZ')
         }
         d[[i]] <- list(name = deployments[[i]]$name,
                     validTime = list(start = start, finish = finish),
@@ -109,6 +106,10 @@ get_platform <- function(id) {
 
 #' The all platforms in the Senaps
 #'
+#' @param id Only return platforms with this id or partial match using wildcards (*, ?).
+#' @param groups filter response by a comma separated list of group ids
+#' @param groupids filter response by a comma separated list of group ids
+#'
 #' @return A data frame with all streamids
 #' @export
 #' @examples
@@ -116,10 +117,18 @@ get_platform <- function(id) {
 #'   get_platforms()
 #' }
 #'
-get_platforms <- function(groups = NULL) {
+get_platforms <- function(id = NULL, groupids = NULL, groups = NULL) {
     query <- list()
+    if (!is.null(id)) {
+        query$id <- id
+    }
     if (!is.null(groups)) {
         query$groupids <- groups
+        # so the interface is consistent with python and REST API
+        warning("groups argument will be deprecated and will be overridden by groupids if defined. Use groupids parameter.")
+    }
+    if (!is.null(groupids)) {
+        query$groupids <- groupids
     }
     response <- request(GET, 'platforms', query = query)
     httr::stop_for_status(response)
@@ -131,6 +140,8 @@ get_platforms <- function(groups = NULL) {
 #' Delete an existing platform
 #'
 #' @param id The platfrom id
+#' @param cascade Logical. Should the deletion take place even if the platform is referenced by other objects.
+#'
 #' @return The status code of request.
 #' \itemize{
 #'   \item 200 OK
@@ -152,4 +163,43 @@ delete_platform <- function(id, cascade = FALSE) {
     response <- request(DELETE, path = paste0('platforms/', id), query = query)
     status <- status_code(response)
     status
+}
+
+#' Get the current deployment for a platform
+#'
+#' @param platform_detail A list of platform details. Output from `get_platform`
+#'
+#' @return A list with deployment details
+#' @export
+#'
+#' @examples
+#' \dontrun{
+#'   current_deployment('rsenaps.platform.test1')
+#' }
+#'
+
+current_deployment <- function(platform_detail) {
+    #  browser()
+    d <- platform_detail$deployments
+
+    if(length(d) == 0) return(NULL)
+
+    finish <- lapply(d, function(d) {
+        return(d$validTime$finish)
+    })
+
+    lfinish <- as.logical(lapply(finish, is.null))
+
+    if(any(lfinish[length(lfinish) - 1])) stop("More than the last deployment has a NULL finish time")
+
+    start <- lapply(d, function(d) {
+        return(d$validTime$start)
+    })
+
+    lstart <- as.logical(lapply(start, is.null))
+
+    if(length(lfinish) != length(start)) stop("check deployments, there's something wrong")
+
+    if(as.POSIXct(start[[1]], format='%Y-%m-%dT%H:%M:%OSZ') < Sys.time()) return(d[[length(d)]])
+
 }

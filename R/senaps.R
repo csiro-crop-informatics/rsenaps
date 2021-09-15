@@ -1,6 +1,3 @@
-# * Author:    Bangyou Zheng (Bangyou.Zheng@csiro.au)
-# * Created:   03:40 PM Saturday, 09 June 2018
-# * Copyright: AS IS
 
 
 #' A R package to communicate with Senaps platform.
@@ -14,7 +11,7 @@ rsenaps <- function() {
 #'
 #' @param dt Date and time format
 #' @param tz timezone
-#' @param url_encode Whether to use RUL encode
+#' @param url_encode Whether to use URL encode
 #'
 #' @return A string for Senaps
 #' @export
@@ -35,8 +32,6 @@ format_datetime <- function(dt, tz = 'GMT', url_encode = FALSE) {
 #' @param method The method in the httr package, e.g. GET, POST
 #' @param path The path of request
 #' @param query The query of request
-#' @param config The config of connection. Suggest to use default method and add credential
-#' in the system environmental variables
 #' @param ... Other arguments of request
 #'
 #' @return The contents of response
@@ -51,10 +46,11 @@ request <- function(method,
     commands <- strsplit(path, '/')[[1]][1]
 
     host <- NULL
-    if (commands %in% c("streams", "groups", "observations",
-                        "locations", "platforms", "roles")) {
+    if (commands %in% c("users", "streams", "groups", "observations",
+                        "locations", "platforms", "roles", "aggregation")) {
         host <- SENAPS_OPTIONS("sensor_url")
-    } else if (commands %in% c("base-images", "models", "workflows", 'schedules')) {
+    } else if (commands %in% c("base-images", "models", "workflows", 'schedules',
+                               "jobs")) {
         host <- SENAPS_OPTIONS("analysis_url")
     } else if (commands %in% c('data')) {
         host <- SENAPS_OPTIONS("tmd_url")

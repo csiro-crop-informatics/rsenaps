@@ -6,6 +6,11 @@
 \usage{
 get_workflows(name = NULL, groups = NULL)
 }
+\arguments{
+\item{name}{A workflow name. Can accept * and ? wildcards.}
+
+\item{groups}{A list of group ids to filter the search}
+}
 \value{
 A list of workflows
 }

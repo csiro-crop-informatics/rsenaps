@@ -1,12 +1,13 @@
-# * Author:    Bangyou Zheng (Bangyou.Zheng@csiro.au)
-# * Created:   03:40 PM Saturday, 09 June 2018
-# * Copyright: AS IS
-
-
-
 #' The all groups in the Senaps
 #'
-#' @return A data frame with all groups
+#' @param id Only return groups with this id or that match the pattern. Accepts * and ? wildcards
+#' @param organisation An organisation id
+#' @param groups A list of group ids to filter by
+#' @param expand Logical. Should the response object be expanded?
+#' @param usermetadatafield The field in the usermetadata you'd like to filter by
+#' @param usermetadatavalues Values to filter the response by in the usermetadatafield
+#'
+#' @return A character vector or named list, depending on expand value
 #' @export
 get_groups <- function(id = NULL,
                        organisation = NULL,
@@ -62,7 +63,7 @@ get_groups <- function(id = NULL,
 #' @return list of group meta data. NULL if group doesn't exist
 #' @export
 get_group <- function(id, recursive = FALSE) {
-    response <- request(GET, paste0('groups/', id), recursive = TRUE)
+    response <- request(httr::GET, paste0('groups/', id), recursive = TRUE)
     status <- httr::status_code(response)
     if (!(status %in% c(200))) {
         return(NULL)
@@ -72,8 +73,8 @@ get_group <- function(id, recursive = FALSE) {
     res$id <- response$id
     res$name <- response$name
     res$description <- response$description
-    res$organisation <- map_chr(response$`_embedded`$organisation, 'id')
-    res$groups <- map_chr(response$`_embedded`$groups, 'id')
+    res$organisation <- purrr::map_chr(response$`_embedded`$organisation, 'id')
+    res$groups <- purrr::map_chr(response$`_embedded`$groups, 'id')
     res$usermetadata <- response$usermetadata
     res
 }
@@ -105,7 +106,7 @@ put_group <- function(id, name, description, organisation, groups = NULL,
                  description = jsonlite::unbox(description),
                  groupids = groups,
                  usermetadata = usermetadata)
-    response <- request(POST, path = paste0('groups/', id),
+    response <- request(httr::POST, path = paste0('groups/', id),
                         body = jsonlite::toJSON(body, auto_unbox = FALSE,
                                                 null = 'null'),
                         encode = 'json')
@@ -125,10 +126,10 @@ put_group <- function(id, name, description, organisation, groups = NULL,
 #' @return The staus code of delete
 #' @export
 delete_group <- function(id, cascade = FALSE) {
-    response <- request(DELETE, path = paste0('groups/', id),
+    response <- request(httr::DELETE, path = paste0('groups/', id),
                         query = list(cascade = cascade))
-    status <- status_code(response)
-    status
+    .stop_for_status(response)
+    return(TRUE)
 }
 
 
@@ -137,6 +138,7 @@ delete_group <- function(id, cascade = FALSE) {
 #' Delete a group and all children with all streams, locations and platforms associated. Use it with your own risk.
 #'
 #' @param id Group id
+#' @param ask Logical. Whether to ask for confirmation or not.
 #'
 #' @export
 clean_group <- function(id, ask = TRUE) {

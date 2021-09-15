@@ -4,13 +4,24 @@
 \alias{put_stream}
 \title{Create a new stream in Senaps}
 \usage{
-put_stream(id, organisation, reportingPeriod, samplePeriod,
-  observedProperty, unitOfMeasure, location = NULL,
-  groups = character(), resulttype = "scalarvalue",
-  interpolationType = "Continuous", usermetadata = NULL)
+put_stream(
+  id,
+  organisation,
+  reportingPeriod,
+  samplePeriod,
+  observedProperty,
+  unitOfMeasure,
+  location = NULL,
+  groups = character(),
+  resulttype = "scalarvalue",
+  interpolationType = "Continuous",
+  usermetadata = NULL
+)
 }
 \arguments{
 \item{id}{The id of new stream. Have to be unique}
+
+\item{organisation}{An organisation id}
 
 \item{reportingPeriod}{Reporting frequency. TODO: Add documentation about valid format}
 
@@ -28,7 +39,7 @@ put_stream(id, organisation, reportingPeriod, samplePeriod,
 
 \item{interpolationType}{Interpolation type. Continuous in default}
 
-\item{organizaton}{The organisation of new location. Have to be an existing organisation}
+\item{usermetadata}{User metadata values}
 }
 \value{
 A list of new stream if the new stream is successfully created
