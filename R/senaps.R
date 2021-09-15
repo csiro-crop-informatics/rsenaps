@@ -7,7 +7,6 @@ rsenaps <- function() {
 
 }
 
-# TODO - should the following format be used here?
 #' Format data and time for Senaps
 #'
 #' @param dt Date and time format
@@ -20,9 +19,7 @@ format_datetime <- function(dt, tz = 'GMT', url_encode = FALSE) {
     if ('Date' %in% class(dt)) {
         dt <- as.POSIXct(format(dt), tz = tz)
     }
-    r <- format(dt, format="%Y-%m-%dT%H:%M:%OS3%z") 
-    # TODO - should this function be used instead of date formating inline?
-    #r <- format(dt, format = '%Y-%m-%dT%H:%M:%OSZ')
+    r <- format(dt, format="%Y-%m-%dT%H:%M:%OS3%z")
     if (url_encode) {
         r <- URLencode(r, reserved = TRUE)
     }
@@ -49,7 +46,7 @@ request <- function(method,
     commands <- strsplit(path, '/')[[1]][1]
 
     host <- NULL
-    if (is.na(commands) || commands %in% c("users", "streams", "groups", "observations",
+    if (commands %in% c("users", "streams", "groups", "observations",
                         "locations", "platforms", "roles", "aggregation")) {
         host <- SENAPS_OPTIONS("sensor_url")
     } else if (commands %in% c("base-images", "models", "workflows", 'schedules',
