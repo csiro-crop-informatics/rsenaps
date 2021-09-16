@@ -11,7 +11,7 @@ format_datetime(dt, tz = "GMT", url_encode = FALSE)
 
 \item{tz}{timezone}
 
-\item{url_encode}{Whether to use RUL encode}
+\item{url_encode}{Whether to use URL encode}
 }
 \value{
 A string for Senaps

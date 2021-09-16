@@ -12,7 +12,8 @@ get_aggregation(
   si = TRUE,
   ei = TRUE,
   tz = "GMT",
-  limit = 1000
+  limit = 1000,
+  name_streams = FALSE
 )
 }
 \arguments{
