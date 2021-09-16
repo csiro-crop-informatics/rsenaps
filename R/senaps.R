@@ -46,7 +46,7 @@ request <- function(method,
     commands <- strsplit(path, '/')[[1]][1]
 
     host <- NULL
-    if (commands %in% c("users", "streams", "groups", "observations",
+    if (commands %in% c(NA, "users", "streams", "groups", "observations",
                         "locations", "platforms", "roles", "aggregation")) {
         host <- SENAPS_OPTIONS("sensor_url")
     } else if (commands %in% c("base-images", "models", "workflows", 'schedules',
