@@ -10,6 +10,8 @@
 #' @param ei Is the end parameter treated as an inclusive boundary
 #' @param tz The timezone of timestamp. GMT/UTC time in default
 #' @param limit Limit the number of results. The limit is 1000 by default.
+#' @param name_streams When TRUE, columns will be named with the stream id appended with avg, min, max and count
+#'        which is more consistent with get_observations
 #' @export
 get_aggregation <- function(streamid,
                             aggperiod,
