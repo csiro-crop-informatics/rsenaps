@@ -87,11 +87,11 @@ get_platform <- function(id) {
     for (i in seq(along = deployments)) {
         start <- NULL
         if (!is.null(deployments[[i]]$validTime$start)) {
-            start <- as.POSIXct(deployments[[i]]$validTime$start, tz = 'GMT')
+            start <- as.POSIXct(deployments[[i]]$validTime$start, tz = 'GMT', format='%Y-%m-%dT%H:%M:%OSZ')
         }
         finish <- NULL
         if (!is.null(deployments[[i]]$validTime$finish)) {
-            finish <- as.POSIXct(deployments[[i]]$validTime$finish, tz = 'GMT')
+            finish <- as.POSIXct(deployments[[i]]$validTime$finish, tz = 'GMT', format='%Y-%m-%dT%H:%M:%OSZ')
         }
         d[[i]] <- list(name = deployments[[i]]$name,
                     validTime = list(start = start, finish = finish),
@@ -106,7 +106,9 @@ get_platform <- function(id) {
 
 #' The all platforms in the Senaps
 #'
-#' @param groups A list of group ids
+#' @param id Only return platforms with this id or partial match using wildcards (*, ?).
+#' @param groups filter response by a comma separated list of group ids
+#' @param groupids filter response by a comma separated list of group ids
 #'
 #' @return A data frame with all streamids
 #' @export
@@ -115,10 +117,18 @@ get_platform <- function(id) {
 #'   get_platforms()
 #' }
 #'
-get_platforms <- function(groups = NULL) {
+get_platforms <- function(id = NULL, groupids = NULL, groups = NULL) {
     query <- list()
+    if (!is.null(id)) {
+        query$id <- id
+    }
     if (!is.null(groups)) {
         query$groupids <- groups
+        # so the interface is consistent with python and REST API
+        warning("groups argument will be deprecated and will be overridden by groupids if defined. Use groupids parameter.")
+    }
+    if (!is.null(groupids)) {
+        query$groupids <- groupids
     }
     response <- request(GET, 'platforms', query = query)
     httr::stop_for_status(response)
@@ -190,6 +200,6 @@ current_deployment <- function(platform_detail) {
 
     if(length(lfinish) != length(start)) stop("check deployments, there's something wrong")
 
-    if(as.POSIXct(start[[1]]) < Sys.time()) return(d[[length(d)]])
+    if(as.POSIXct(start[[1]], format='%Y-%m-%dT%H:%M:%OSZ') < Sys.time()) return(d[[length(d)]])
 
 }

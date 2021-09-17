@@ -4,10 +4,14 @@
 \alias{get_platforms}
 \title{The all platforms in the Senaps}
 \usage{
-get_platforms(groups = NULL)
+get_platforms(id = NULL, groupids = NULL, groups = NULL)
 }
 \arguments{
-\item{groups}{A list of group ids}
+\item{id}{Only return platforms with this id or partial match using wildcards (*, ?).}
+
+\item{groupids}{filter response by a comma separated list of group ids}
+
+\item{groups}{filter response by a comma separated list of group ids}
 }
 \value{
 A data frame with all streamids

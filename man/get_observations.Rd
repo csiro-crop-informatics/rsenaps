@@ -12,7 +12,8 @@ get_observations(
   ei = TRUE,
   tz = "GMT",
   descending = FALSE,
-  limit = 1000
+  limit = 1000,
+  name_streams = FALSE
 )
 }
 \arguments{
@@ -31,6 +32,8 @@ get_observations(
 \item{descending}{Sort the results. By default results are returned in ascending order.}
 
 \item{limit}{Limit the number of results. The limit is 1000 by default.}
+
+\item{name_streams}{when TRUE, the returned value column name is the stream id which will facilitate future queries to return multiple streams.}
 }
 \description{
 Get a collection of observations

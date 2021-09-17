@@ -10,6 +10,9 @@
 #' @param tz The timezone of timestamp. GMT/UTC time in default
 #' @param descending Sort the results. By default results are returned in ascending order.
 #' @param limit Limit the number of results. The limit is 1000 by default.
+#' @param name_streams when TRUE, the returned value column name is the stream id which will facilitate future queries to return multiple streams.
+#           Default is FALSE so existing code does not break.  
+#           Please set this to TRUE for future applications to avoid breaking changes in the future.
 #' @export
 get_observations <- function(streamid,
                              start = NULL,
@@ -18,7 +21,12 @@ get_observations <- function(streamid,
                              ei = TRUE,
                              tz = "GMT",
                              descending = FALSE,
-                             limit = 1000) {
+                             limit = 1000,
+                             name_streams = FALSE) {
+    if (!name_streams) {
+        warning('To support multistream downloads, this data format will be depricated.  Please modify code to use name_streams = TRUE')
+    }
+
     # Check the length of streamid
     if (length(streamid) > 1) {
         stop('Only 1 stream is supported.')
@@ -75,12 +83,15 @@ get_observations <- function(streamid,
                 })
             rm(req)
             rm(response)
+            if (name_streams) {
+                names(res)[names(res) == 'value'] <- streamid
+            }
             if (nrow(res) == 0) {
                 break
             }
             res$timestamp <- lubridate::with_tz(
                 as.POSIXct(res$timestamp,
-                           format = "%Y-%m-%dT%H:%M:%OS", tz = 'GMT'),
+                           format = "%Y-%m-%dT%H:%M:%OSZ", tz = 'GMT'),
                 tz = tz)
             k <- k + 1
             result[[k]] <- res

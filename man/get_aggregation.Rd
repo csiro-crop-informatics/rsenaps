@@ -12,7 +12,8 @@ get_aggregation(
   si = TRUE,
   ei = TRUE,
   tz = "GMT",
-  limit = 1000
+  limit = 1000,
+  name_streams = FALSE
 )
 }
 \arguments{
@@ -31,6 +32,9 @@ get_aggregation(
 \item{tz}{The timezone of timestamp. GMT/UTC time in default}
 
 \item{limit}{Limit the number of results. The limit is 1000 by default.}
+
+\item{name_streams}{When TRUE, columns will be named with the stream id appended with avg, min, max and count
+which is more consistent with get_observations}
 }
 \description{
 Calculate an aggregated view of observations. The aggregation is calculated on demand.

@@ -11,7 +11,7 @@ rsenaps <- function() {
 #'
 #' @param dt Date and time format
 #' @param tz timezone
-#' @param url_encode Whether to use RUL encode
+#' @param url_encode Whether to use URL encode
 #'
 #' @return A string for Senaps
 #' @export
@@ -46,7 +46,7 @@ request <- function(method,
     commands <- strsplit(path, '/')[[1]][1]
 
     host <- NULL
-    if (commands %in% c("streams", "groups", "observations",
+    if (commands %in% c(NA, "users", "streams", "groups", "observations",
                         "locations", "platforms", "roles", "aggregation")) {
         host <- SENAPS_OPTIONS("sensor_url")
     } else if (commands %in% c("base-images", "models", "workflows", 'schedules',
