@@ -135,7 +135,8 @@
   ei <span class='op'>=</span> <span class='cn'>TRUE</span>,
   tz <span class='op'>=</span> <span class='st'>"GMT"</span>,
   descending <span class='op'>=</span> <span class='cn'>FALSE</span>,
-  limit <span class='op'>=</span> <span class='fl'>1000</span>
+  limit <span class='op'>=</span> <span class='fl'>1000</span>,
+  name_streams <span class='op'>=</span> <span class='cn'>FALSE</span>
 <span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -172,6 +173,10 @@
     <tr>
       <th>limit</th>
       <td><p>Limit the number of results. The limit is 1000 by default.</p></td>
+    </tr>
+    <tr>
+      <th>name_streams</th>
+      <td><p>when TRUE, the returned value column name is the stream id which will facilitate future queries to return multiple streams.</p></td>
     </tr>
     </table>
 

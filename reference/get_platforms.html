@@ -127,14 +127,22 @@
     <p>The all platforms in the Senaps</p>
     </div>
 
-    <pre class="usage"><span class='fu'>get_platforms</span><span class='op'>(</span>groups <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>get_platforms</span><span class='op'>(</span>id <span class='op'>=</span> <span class='cn'>NULL</span>, groupids <span class='op'>=</span> <span class='cn'>NULL</span>, groups <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
+      <th>id</th>
+      <td><p>Only return platforms with this id or partial match using wildcards (*, ?).</p></td>
+    </tr>
+    <tr>
+      <th>groupids</th>
+      <td><p>filter response by a comma separated list of group ids</p></td>
+    </tr>
+    <tr>
       <th>groups</th>
-      <td><p>A list of group ids</p></td>
+      <td><p>filter response by a comma separated list of group ids</p></td>
     </tr>
     </table>
 
